@@ -1,0 +1,187 @@
+
+Exercice noté #2
+Votre travail cette semaine est de concevoir deux classes
+mathématiques :
+
+- Vecteur
+- Matrice
+
+
+L'interface publique des deux objets est définie comme suit :
+
+Classe Vecteur
+==============
+
+    public Vecteur(double[] elements)
+
+       Constructeur avec en paramètre un tableau d'éléments de type
+       `double`
+
+    public void setElement(int index, double valeur)
+
+       Permet de changer la valeur à l'index donné (commence à 0,
+       comme dans un tableau)
+
+    public double getElement(int index)
+
+       Retourne la valeur à l'index demandé
+
+    public double dotProduct(Vecteur v)
+
+       Calcule le produit scalaire avec un autre vecteur
+
+    public void afficher()
+
+       Affiche le contenu du vecteur entres accolades sur la console.
+
+       Par exemple, le vecteur qui contient les nombres 1,2 et 3 sera
+       affiché avec :
+
+       {1.0, 2.0, 3.0}
+
+
+Classe Matrice
+==============
+
+    public Matrice(int lignes, int cols)
+   
+        Constructeur pour une matrice de taille Nlignes x Mcolonnes
+        remplie de zéros
+
+    public void additionnerScalaire(double n)
+
+        Additionne la valeur n dans toutes les cellules de la matrice
+        (modifie la matrice actuelle)
+
+    public void multiplierScalaire(double n)
+
+        Multiplie toutes les cellules par un scalaire
+        (modifie la matrice actuelle)
+
+    public Matrice dotProduct(Matrice m)
+
+        Fait le produit matriciel entre deux matrices
+        (crée une *nouvelle matrice* de la bonne taille, ne modifie
+        pas les deux matrices originales)
+
+    public double getCell(int ligne, int col)
+
+        Accesseur pour la cellule à une ligne/colonne donnée
+
+    public void setCell(int ligne, int col, double valeur)
+
+        Mutateur pour la cellule à une ligne/colonne donnée
+
+    public Vecteur getLine(int ligne)
+
+        Retourne un nouveau vecteur contenant la Nième ligne
+
+    public Vecteur getCol(int col)
+
+        Retourne un nouveau vecteur contenant la Nième colonne
+
+    public void afficher()
+
+        Affiche la matrice sur la console, chaque ligne entre crochets [ ]
+
+        Par exemple, la matrice qui contient les nombres 1 et 2 sur la
+        première ligne et 13 et 14 sur la deuxième ligne sera affichée
+        avec :
+
+        [ 1.0 2.0 ]
+        [ 13.0 14.0 ]
+
+
+    public Matrice transpose()
+
+        Retourne une version transposée de la matrice
+        (sans modifier la matrice actuelle)
+
+    public static Matrice identite(int n)
+
+        Retourne une instance de la matrice identité N x N
+
+
+------
+
+
+Certaines (mauvaises) utilisations de ces classes peuvent lancer des
+erreurs, on vous demande de les gérer de la façon suivante :
+
+    * dotProduct d'un Vecteur avec un autre
+      => Si les dimensions des vecteurs multipliés ne sont pas
+         cohérentes, exécutez ce code :
+
+            System.err.println("Erreur dans les dimensions des vecteurs");
+            return Double.NaN;
+
+    * dotProduct d'une Matrice
+      => Si les dimensions des matrice multipliées ne sont pas
+         cohérentes, exécutez ce code :
+
+            System.err.println("Erreur dans les dimensions des matrices");
+            return null;
+
+    * getCell/setCell/... toutes les fonctions qui accèdent à des index
+      => Si l'index dépasse les bornes de la matrice ou du vecteur
+       > Ne gérez pas l'erreur, laissez le programme planter à l'exécution
+
+
+Vous êtes libres de définir les attributs qui vous semblent
+nécessaires
+
+Assurez-vous de respecter le principe d'encapsulation, c'est-à-dire
+que l'état d'une Matrice et d'un Vecteur ne devraient pas être
+modifiable sans passer par les méthodes de l'objet.
+
+
+Écrivez une classe Exercice2 qui teste toutes les fonctionnalités de
+vos classes dans la fonction main. Assurez-vous que *toutes* les
+fonctions demandées respectent l'interface spécifiée. Si ce n'est pas
+le cas, votre code ne compilera pas lors des tests et vous aurez la
+note de zéro.
+
+
+Basez-vous sur le code suivant et complétez-le :
+
+public class Exercice2 {
+
+    public static void main(String[] args) {
+
+        double[] elements = new double[]{1, 2, 3};
+        Vecteur v1 = new Vecteur(elements);
+        Vecteur v2 = new Vecteur(elements);
+        v2.setElement(0, 10);
+
+        System.out.println("--- Vecteurs ---");
+        v1.afficher();
+        v2.afficher();
+
+        System.out.println("--- Matrices ---");
+        Matrice m1 = Matrice.identite(2);
+        m1.multiplierScalaire(3);
+        m1.setCell(0, 1, 5);
+        m1.setCell(1, 0, -2);
+        System.out.println("Matrice 1 :");
+        m1.afficher();
+
+        Matrice m2 = new Matrice(2, 1);
+        m2.additionnerScalaire(10);
+        System.out.println("Matrice 2 :");
+        m2.afficher();
+
+        Matrice m3 = m1.dotProduct(m2);
+        System.out.println("Matrice 3 :");
+        m3.afficher();
+
+        // ... d'autres tests que vous écrirez ...
+    }
+}
+
+
+- Assurez-vous de nommer vos fichiers Exercice2.java, Vecteur.java et
+  Matrice.java
+- Ces exercices seront corrigés automatiquement. Assurez-vous de
+  respecter la spécification et assurez-vous que votre programme
+  compile si vous ne voulez pas vous retrouver avec la note de 0.
+- Ce travail compte pour 3% de votre note finale
